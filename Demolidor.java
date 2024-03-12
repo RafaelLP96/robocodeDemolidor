@@ -1,3 +1,4 @@
+// New version 0.2 11-03-24
 package sample;
 
 import robocode.*;
