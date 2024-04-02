@@ -1,4 +1,4 @@
-// New version 0.2 11-03-24
+// 01/04/2024 version
 package sample;
 
 import robocode.*;
@@ -10,6 +10,7 @@ import java.lang.Math;
 
 public class Demolidor extends AdvancedRobot {
     boolean movingForward;
+	boolean lockForward = false;
     public void run() {
 	
         // Cores
@@ -22,9 +23,11 @@ public class Demolidor extends AdvancedRobot {
         // Loop 
         while (true) {
             // Movimentar
+			if (lockForward=true){
 			movingForward = true;
             setAhead(100);
             setTurnRight(95);
+			}
             execute();
         }
     }
@@ -32,7 +35,8 @@ public class Demolidor extends AdvancedRobot {
     public void onScannedRobot(ScannedRobotEvent e) {
 
             setTurnGunRight(getHeading() - getGunHeading() + e.getBearing());
-           
+            setTurnRight(2);
+			
 			double distance = e.getDistance();
 	        double power = 3 /distance*200; // Quanto maior a distância, menor a força do tiro
 	        
@@ -50,6 +54,12 @@ public class Demolidor extends AdvancedRobot {
 	        fire(power);
 			out.println(Math.round(power));
 		}
+		if (distance<300){
+			setBack(90);
+			lockForward=true;
+			}else{
+			lockForward=false;
+			}
     }
 	
 	public void onHitByBullet(HitByBulletEvent e){
@@ -73,6 +83,7 @@ public class Demolidor extends AdvancedRobot {
 			reverseDirection();
 			setTurnRight(20);
 			back(50);
+			turnRight(10);
 		}
 	}
 	
