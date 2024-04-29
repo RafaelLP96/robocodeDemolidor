@@ -50,16 +50,16 @@ public class Demolidor extends AdvancedRobot {
         setTurnGunRight(getHeading() - getGunHeading() + e.getBearing());
         
         // Atirar com a força calculada e nao atirar se estiver longe
-		if (distance<600){
+		if (distance<800){
 	        fire(power);
 			out.println(Math.round(power));
 		}
 		if (distance<300){
 			setBack(90);
 			lockForward=true;
-			}else{
+		}else{
 			lockForward=false;
-			}
+		}
     }
 	
 	public void onHitByBullet(HitByBulletEvent e){
@@ -81,9 +81,8 @@ public class Demolidor extends AdvancedRobot {
 		
 		if (e.isMyFault()) {
 			reverseDirection();
-			setTurnRight(20);
-			back(50);
-			turnRight(10);
+			setTurnRight(60);
+			back(80);
 		}
 	}
 	
